@@ -3,48 +3,50 @@ arr_1000 = [1050,2603,2312,95,3637,212,2742,1402,3761,4347,3760,322,991,910,4041
 # dado un arreglo de monedas, devuelve el array excluyendo la moneda que tomo mateo
 def decision_mateo(arr, inicio = 0, fin = 0):
     if arr[inicio] > arr[fin - 1]:
-        return arr[inicio + 1: fin]
-    return arr[inicio: fin - 1]
+        # return arr[inicio + 1: fin]
+        return (inicio + 1, fin)
+    # return arr[inicio: fin - 1]
+    return (inicio, fin - 1)
 
 
 # Usamos esta variable para memoizar los resultados de max_sofia
 memory = {}
 
 # dado un arreglo de monedas, devuelve la ganancia maxima de sofia
-def max_sofia(arr):
-    if arr == []:
+def inner_max_sofia(arr, inicio = 0, fin = 0):
+    if inicio >= fin:
         return 0
-    if len(arr) == 1:
-        return arr[0] # casos impares
     
-    array_string = str(arr)
-    # si ya calculamos la respuesta, la devolvemos
-    if array_string in memory:
-        return memory[array_string]
+    key = (inicio, fin)
+    if key in memory:
+        return memory[key]
 
-    primer_moneda = arr[0]
-    ultima_moneda = arr[len(arr) - 1]
+    primer_moneda = arr[inicio]
+    ultima_moneda = arr[fin-1]
     
-    mateo_decision_sofia_agarro_primer_moneda = decision_mateo(arr, 1, len(arr))
-    mateo_decision_sofia_agarro_ultima_moneda = decision_mateo(arr, 0, len(arr)-1)
+    decision_mateo_1 = decision_mateo(arr, inicio + 1, fin)
+    decision_mateo_2 = decision_mateo(arr, inicio, fin-1)
 
-    ganancia = max(primer_moneda + max_sofia(mateo_decision_sofia_agarro_primer_moneda), 
-                   ultima_moneda + max_sofia(mateo_decision_sofia_agarro_ultima_moneda))
+    ganancia = max(primer_moneda + inner_max_sofia(arr,decision_mateo_1[0],decision_mateo_1[1]), 
+                   ultima_moneda + inner_max_sofia(arr, decision_mateo_2[0], decision_mateo_2[1]))
     
     # guardamos la respuesta en la memoria
-    memory[array_string] = ganancia
+    memory[key] = ganancia
 
     return ganancia
 
+def max_sofia(arr):
+    return inner_max_sofia(arr, 0, len(arr))
+
 def main():
 
-    # print(max_sofia([8, 15, 3, 7])) # caso nico
-    # print(f'5: {max_sofia([96,594,437,674,950])}') # 5
-    # print(f'10: {max_sofia([520,781,334,568,706,362,201,482,19,145])}') # 10
-    # print(f'20: {max_sofia([455,852,725,410,835,239,404,462,629,587,171,604,826,838,384,336,21,125,378,217])}') # 20
-    # print(f'25: {max_sofia([704,752,956,874,790,157,405,224,931,636,921,903,345,266,427,983,172,367,390,30,935,623,323,539,361])}') # 25
-    # print(f'50: {max_sofia([429,116,914,353,849,809,169,940,969,142,311,812,764,303,927,934,422,73,179,471,294,101,970,515,591,731,189,674,35,793,971,913,182,493,568,662,398,774,511,761,767,522,79,797,999,820,904,580,58,887])}') # 50
+    print("trivial:",max_sofia([8, 15, 3, 7])) # Caso Nico
+    print(f'5: {max_sofia([96,594,437,674,950]) }') # 5
+    print(f'10: {max_sofia([520,781,334,568,706,362,201,482,19,145])}') # 10
+    print(f'20: {max_sofia([455,852,725,410,835,239,404,462,629,587,171,604,826,838,384,336,21,125,378,217])}') # 20
+    print(f'25: {max_sofia([704,752,956,874,790,157,405,224,931,636,921,903,345,266,427,983,172,367,390,30,935,623,323,539,361])}') # 25
+    print(f'50: {max_sofia([429,116,914,353,849,809,169,940,969,142,311,812,764,303,927,934,422,73,179,471,294,101,970,515,591,731,189,674,35,793,971,913,182,493,568,662,398,774,511,761,767,522,79,797,999,820,904,580,58,887])}') # 50
     
-    print(max_sofia(arr_1000)) # tarda infinito (1000)
+    print("1000:",max_sofia(arr_1000)) # tarda infinito (1000)
 
 main()
