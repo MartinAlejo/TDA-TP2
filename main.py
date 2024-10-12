@@ -53,4 +53,6 @@ def main():
     for ejemplo in sorted (ejemplos, key = lambda x: int(x.split(".")[0])):
         monedas = obtener_monedas(f"ejemplos/{ejemplo}")
         print(f"El resultado para {ejemplo} es: {juego_monedas(monedas)}")
-main()
+
+if __name__ == "__main__":
+    main()
