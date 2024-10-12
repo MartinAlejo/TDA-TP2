@@ -50,7 +50,6 @@ def test_50_monedas():
 
     assert acum_sophia == 14976
 
-# TODO: FALLA (quiza error de la catedra)
 def test_100_monedas():
     monedas = obtener_monedas("./ejemplos/100.txt")
     acum_sophia = juego_monedas(monedas)
