@@ -10,11 +10,7 @@ def decision_mateo(arr, inicio = 0, fin = 0):
         return (inicio + 1, fin)
     return (inicio, fin - 1)
 
-
-# Usamos un diccionario para memorizar los resultados de max_sofia
-memory = {}
-
-def inner_max_sofia(arr, inicio = 0, fin = 0):
+def _juego_monedas(arr, inicio = 0, fin = 0, memory = {}):
     if inicio >= fin:
         return 0
     
@@ -28,8 +24,8 @@ def inner_max_sofia(arr, inicio = 0, fin = 0):
     decision_mateo_1 = decision_mateo(arr, inicio + 1, fin)
     decision_mateo_2 = decision_mateo(arr, inicio, fin-1)
 
-    ganancia = max(primer_moneda + inner_max_sofia(arr,decision_mateo_1[0],decision_mateo_1[1]), 
-                   ultima_moneda + inner_max_sofia(arr, decision_mateo_2[0], decision_mateo_2[1]))
+    ganancia = max(primer_moneda + _juego_monedas(arr,decision_mateo_1[0],decision_mateo_1[1]), 
+                   ultima_moneda + _juego_monedas(arr, decision_mateo_2[0], decision_mateo_2[1]))
     
     # guardamos la respuesta en la memoria
     memory[key] = ganancia
@@ -38,7 +34,8 @@ def inner_max_sofia(arr, inicio = 0, fin = 0):
 
 # Dado un arreglo de monedas, devuelve la ganancia maxima de sofia
 def juego_monedas(arr):
-    return inner_max_sofia(arr, 0, len(arr))
+    memory = {}
+    return _juego_monedas(arr, 0, len(arr), memory)
 
 # Dado un archivo csv, devuelve una lista con las monedas
 def obtener_monedas(path):
@@ -47,12 +44,16 @@ def obtener_monedas(path):
         return [int(moneda) for moneda in next(csv_reader)]
 
 def main():
+    monedas = obtener_monedas(f"ejemplos/50.txt")
+    print(f"El resultado para 50 es: {juego_monedas(monedas)}")
 
-    ejemplos = [f for f in os.listdir("ejemplos") if f.endswith(".txt")]
+    monedas = obtener_monedas(f"ejemplos/100.txt")
+    print(f"El resultado para 100 es: {juego_monedas(monedas)}")
+    # ejemplos = [f for f in os.listdir("ejemplos") if f.endswith(".txt")]
     
-    for ejemplo in sorted (ejemplos, key = lambda x: int(x.split(".")[0])):
-        monedas = obtener_monedas(f"ejemplos/{ejemplo}")
-        print(f"El resultado para {ejemplo} es: {juego_monedas(monedas)}")
+    # for ejemplo in sorted (ejemplos, key = lambda x: int(x.split(".")[0])):
+    #     monedas = obtener_monedas(f"ejemplos/{ejemplo}")
+    #     print(f"El resultado para {ejemplo} es: {juego_monedas(monedas)}")
 
 if __name__ == "__main__":
     main()
