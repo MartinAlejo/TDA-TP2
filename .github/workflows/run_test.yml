@@ -12,5 +12,6 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}  
         uses: actions/setup-python@v4  
       - name: Run tests with pytest  
-        run: |  
+        run: |
+          pip install pytest
           pytest test_main.py -v -s
