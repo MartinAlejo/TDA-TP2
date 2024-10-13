@@ -84,8 +84,8 @@ def main(path):
     resultado, memoria = juego_monedas(monedas)
 
     solucion, ganancia_mateo = reconstruir_solucion(memoria, monedas)
-    print(f"La ganancia de Sophia es: {resultado}")
-    print(f"La ganancia de Mateo es: {ganancia_mateo}")
+    print(f"Ganancia Sophia: {resultado}")
+    print(f"Ganancia Mateo: {ganancia_mateo}")
     print("\nMovimientos:\n")
     for elemento in solucion:
         print(elemento)
