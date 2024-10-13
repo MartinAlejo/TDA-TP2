@@ -27,3 +27,9 @@ Donde **path** es la ruta a un archivo csv, cuya primer linea tiene las monedas 
 Para correr las pruebas, ejecutar el comando ```pytest``` sobre el directorio raíz.
 
 ***Nota**: Se debe contar con pytest instalado.*
+
+## Notebook para verificar complejidad algoritmica
+* Navegar al directirio `/VerificacionComplejidad`
+* Iniciar el venv con source `myenv/bin/activate`
+* Instalar dependencias necesarias con `pip install -r requirements.txt`
+* Lanzar Jupyter notebook con `jupyter notebook`
