@@ -78,21 +78,19 @@ def reconstruir_solucion(memory, arr):
 
     return solucion, ganancia_mateo
 
-def main():
+def main(path):
 
-    monedas = obtener_monedas("ejemplos/5.txt")
+    monedas = obtener_monedas(path)
     resultado, memoria = juego_monedas(monedas)
 
-    print(f"El resultado para 5.txt es: {resultado}")
-
     solucion, ganancia_mateo = reconstruir_solucion(memoria, monedas)
-    print("La solución es:")
+    print("La solución es: \n")
     for elemento in solucion:
         print(elemento)
     
-    print(f"La ganancia de Mateo es: {ganancia_mateo}")
+    print(f"\nLa ganancia de Mateo es: {ganancia_mateo}")
     print(f"La ganancia de Sofia es: {resultado}")
 
-
 if __name__ == "__main__":
-    main()
+    path = sys.argv[1]
+    main(path)
