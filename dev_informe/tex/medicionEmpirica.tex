@@ -1,17 +1,2 @@
 \section{Medición empírica}
 
-Para comprobar empíricamente la complejidad \textbf{O(n)} del algoritmo, se decidió ejecutar el mismo con distintos tamaños de entrada y medir el tiempo de ejecución. Se generaron muestras de tamaño n, las cuales varían desde 100 hasta 100 millones.
-
-Para cada muestra se registró el tiempo de ejecución, obteniendo el siguiente gráfico:
-
-\begin{center}
-    \includegraphics[scale = 0.6]{ {images/tiempoDeEjec.png} }
-\end{center}
-
-A simple vista se puede observar un crecimiento lineal. Para confirmar esto, vamos a ajustar los datos a una recta mediante cuadrados mínimos. Esto lo realizamos con Python y la función \textit{optimize.curve\_fit} de la biblioteca \textit{scipy}.
-
-Obtenemos que el gráfico se puede ajustar a la recta $y = 4.54e^{-07}x + 0.25$, con un error cuadrático medio de 0.06. Por lo tanto, podemos verificar lo que ya vimos en la seccion 3, que el orden es lineal \textbf{O(n)}.
-
-\begin{center}
-    \includegraphics[scale = 0.6]{ {images/cuadradosMinimos.png} } 
-\end{center}
