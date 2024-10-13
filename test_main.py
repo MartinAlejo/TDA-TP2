@@ -1,27 +1,27 @@
 from main import *
 
 # De momento no se usa (una vez que tengamos la reconstruccion del camino, si)
-# def _obtener_movimientos(path, delimiter):
-#     movimientos = []
-#     with open(path, "r", encoding='utf-8') as f:
-#         csv_reader = csv.reader(f, delimiter=delimiter)
-#         for l in csv_reader:
-#             for mov in l:
-#                 movimientos.append(mov)
-#     return movimientos
+def _obtener_movimientos(path, delimiter):
+    movimientos = []
+    with open(path, "r", encoding='utf-8') as f:
+        csv_reader = csv.reader(f, delimiter=delimiter)
+        for l in csv_reader:
+            for mov in l:
+                movimientos.append(mov)
+    return movimientos
 
 def test_4_monedas():
     monedas = obtener_monedas("./ejemplos/4.txt")
-    #movimientos_esperados = _obtener_movimientos("./ejemplos/5_movimientos_esperados.txt")
-    #movimientos, acum_sophia, acum_mateo = juego_monedas(monedas)
-    acum_sophia, _ = juego_monedas(monedas)
+    movimientos_esperados = _obtener_movimientos("./ejemplos/resultados/4_movimientos_esperados.txt", ";")
+    acum_sophia, memory = juego_monedas(monedas)
+    movimientos, acum_mateo = reconstruir_solucion(memory, monedas)
 
     assert acum_sophia == 22
+    assert acum_mateo == 11
+    assert movimientos == movimientos_esperados
 
 def test_5_monedas():
     monedas = obtener_monedas("./ejemplos/5.txt")
-    #movimientos_esperados = _obtener_movimientos("./ejemplos/5_movimientos_esperados.txt")
-    #movimientos, acum_sophia, acum_mateo = juego_monedas(monedas)
     acum_sophia, _ = juego_monedas(monedas)
 
     assert acum_sophia == 1483

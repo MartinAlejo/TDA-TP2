@@ -84,12 +84,11 @@ def main(path):
     resultado, memoria = juego_monedas(monedas)
 
     solucion, ganancia_mateo = reconstruir_solucion(memoria, monedas)
-    print("La solución es: \n")
+    print(f"La ganancia de Sophia es: {resultado}")
+    print(f"La ganancia de Mateo es: {ganancia_mateo}")
+    print("\nMovimientos:\n")
     for elemento in solucion:
         print(elemento)
-    
-    print(f"\nLa ganancia de Mateo es: {ganancia_mateo}")
-    print(f"La ganancia de Sofia es: {resultado}")
 
 if __name__ == "__main__":
     path = sys.argv[1]
