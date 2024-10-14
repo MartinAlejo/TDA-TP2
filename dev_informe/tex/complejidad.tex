@@ -53,8 +53,8 @@ Partimos de un caso base, donde si Sophia no tiene monedas para elegir, la ganan
 Luego en cada llamado recursivo, vemos que moneda debemos elegir para maximizar la ganancia de ese sub-problema, y guardamos en memoria el resultado para no tener que volver a calcularlo en caso de que se repita. De esta forma, combinando la solución de los subproblemas, encontramos la solucion del problema original, que resulta en la máxima ganancia que puede obtener Sophia.
 
 
-La complejidad temporal de este algoritmo en principio sería exponencial \textbf{(O($2^n$))}, ya que en cada llamado recursivo se hacen dos llamados recursivos más, y así sucesivamente.
-Sin embargo, al utilizar memoria para guardar los resultados de los subproblemas, evitamos tener que recalcularlos, reduciendo la complejidad a cuadrática \textbf{(O($n^2$))}. Esta complejidad surge de que la cantidad de subproblemas a resolver es $n^2$, ya que cada subproblema esta definido por un intervalo $i$,$j$ donde $i$ y $j$ pueden tomar valores de 0 a $n-1$, siendo $n$ la cantidad de monedas disponibles.
+La complejidad temporal de este algoritmo en principio sería exponencial \textbf{O($2^n$)}, ya que en cada llamado recursivo se hacen dos llamados recursivos más, y así sucesivamente.
+Sin embargo, al utilizar memoria para guardar los resultados de los subproblemas, evitamos tener que recalcularlos, reduciendo la complejidad a cuadrática \textbf{O($n^2$)}. Esta complejidad surge de que la cantidad de subproblemas a resolver es $n^2$, ya que cada subproblema esta definido por un intervalo $i$,$j$ donde $i$ y $j$ pueden tomar valores de 0 a $n-1$, siendo $n$ la cantidad de monedas disponibles.
 
 La complejidad espacial del algoritmo es \textbf{O($n^2$)} ya que la memoria utilizada para guardar los resultados de los subproblemas es proporcional a la cantidad de subproblemas a resolver. Respecto al tamaño del stack es despreciable frente a este valor, ya que a lo sumo hay $n$ llamados recursivos en simultaneo.
 

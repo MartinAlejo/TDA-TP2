@@ -1,6 +1,5 @@
 from main import *
 
-# De momento no se usa (una vez que tengamos la reconstruccion del camino, si)
 def _obtener_movimientos(path, delimiter):
     movimientos = []
     with open(path, "r", encoding='utf-8') as f:

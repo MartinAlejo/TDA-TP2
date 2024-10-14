@@ -4,7 +4,8 @@ import os
 
 sys.setrecursionlimit(30000)
 
-# Dado un arreglo de monedas, devuelve el array excluyendo la moneda que tomo mateo
+# Dado un arreglo de monedas, devuelve una tupla, que contiene los indices
+# del array excluyendo la moneda que tomo Mateo
 def decision_mateo(arr, inicio = 0, fin = 0):
     if arr[inicio] > arr[fin - 1]:
         return (inicio + 1, fin)
@@ -16,7 +17,7 @@ def _juego_monedas(arr, inicio = 0, fin = 0, memory = {}):
     
     key = (inicio, fin)
     if key in memory:
-        return memory[key]
+        return memory[key] # El subproblema ya fue resuelto
 
     primer_moneda = arr[inicio]
     ultima_moneda = arr[fin-1]
@@ -27,12 +28,13 @@ def _juego_monedas(arr, inicio = 0, fin = 0, memory = {}):
     ganancia = max(primer_moneda + _juego_monedas(arr,decision_mateo_1[0],decision_mateo_1[1], memory), 
                    ultima_moneda + _juego_monedas(arr, decision_mateo_2[0], decision_mateo_2[1], memory))
     
-    # guardamos la respuesta en la memoria
+    # Guardamos la ganancia en la memoria
     memory[key] = ganancia
 
     return ganancia
 
-# Dado un arreglo de monedas, devuelve la ganancia maxima de Sofia y la memoria de las llamadas recursivas.
+# Dado un arreglo de monedas, devuelve la ganancia maxima de Sophia y la memoria que contiene la  
+# solucion de cada subproblema
 def juego_monedas(arr):
     memory = {}
     return _juego_monedas(arr, 0, len(arr), memory), memory
@@ -43,7 +45,8 @@ def obtener_monedas(path):
         csv_reader = csv.reader(f, delimiter=";")
         return [int(moneda) for moneda in next(csv_reader)]
 
-# Dado la memoria de llamadas recursivas y el arreglo de monedas, reconstruye el camino de las decisiones tomadas.
+# Dado la memoria de llamadas recursivas y el arreglo de monedas, reconstruye el camino de las 
+# decisiones tomadas, junto con la ganancia de Mateo.
 def reconstruir_solucion(memory, arr):
     solucion = []
     inicio = 0
