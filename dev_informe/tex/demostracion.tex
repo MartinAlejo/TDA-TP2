@@ -1,6 +1,6 @@
 \section{Demostración del Algortimo}
 
-Para que la ecuación de recurrencia sea la solución óptima, o sea que nos de el \textbf{máximo valor acumulado posible}, basta con verificar que:
+En un problema que involucra programacion dinamica, para hallar la solución óptima, o sea que nos de el \textbf{máximo valor acumulado posible}, se debe cumplir que:
 
 \begin{enumerate}
     \item La solución óptima de un problema grande puede obtenerse combinando soluciones óptimas de subproblemas más pequeños.
@@ -8,12 +8,15 @@ Para que la ecuación de recurrencia sea la solución óptima, o sea que nos de 
     \item Se debe tomar una decisión sobre cuál subproblema o combinación de subproblemas proporciona el valor máximo.
 \end{enumerate}
 
-
+Vamos a demostrar entonces que nuestro algoritmo siempre encuentra la maxima ganancia que puede obtener Sophia:
 
 \begin{itemize}
-    \item Nuestro caso base sería: Si no hay monedas, Sophia tendría ganancia cero ya que no habría monedas para agarrar.
-    \item Si Sophia agarra la primera moneda, podemos calcular su ganancia como el valor de esa moneda, más lo que ella recolectará en turnos posteriores. Esto teniendo en cuenta
-    que Mateo siempre siempre va a elegir la moneda de mayor valor entre la primera y la última. En este punto del análisis, se ve como el problema se divide en subproblemas, o sea por cada turno de Sophia.
-    \item Si Sophia agarra la última moneda, realizamos la misma lógica anterior, nada más que para la última moneda.
-    \item Luego, elegimos cuál de los dos escenarios logra obtener la máxima ganancia. A medida que vamos maximizando los escenarios locales, finalmente llegaremos al óptimo global de nuestro problema, o sea la ganacia máxima posible que puede obtener Sophia.
+    \item Nuestro caso base es el siguiente: Si no hay monedas, Sophia tendría ganancia cero ya que no habría monedas para agarrar.
+    \item Un subproblema es determinar la ganancia máxima que Sophia puede obtener en un intervalo de monedas dado por los índices \(i\) y \(j\) en el arreglo de monedas (donde \(i\) representa el índice de la primera moneda, y \(j\) el de la última). Para cada subproblema, Sophia debe tomar la decisión de sí:
+    \begin{itemize}
+        \item Agarrar la primera moneda \(m_i\), luego continuar con el subproblema de las monedas entre los índices \(i+2\) y \(j\) (si Mateo también agarró la primera moneda) o \(i+1\) y \(j-1\) (si Mateo agarró la última moneda).
+        \item Agarrar la última moneda \(m_j\), luego continuar con el subproblema de las monedas entre los índices \(i+1\) y \(j-1\) (si Mateo agarró la primera moneda) o \(i\) y \(j-2\) (si Mateo también agarró la última moneda).
     \end{itemize}
+    \item Como vemos en el ítem anterior, nuestros subproblemas cada vez se vuelven más pequeños, hasta eventualmente alcanzar el caso base (Top Down). A medida que vamos resolviendo los subproblemas, los memorizamos para no tener que recalcularlos, y ya que estamos considerando todas las posibilidades de decisión que puede tomar Sophia (y que va a tomar Mateo en consecuencia), hemos considerado (y memorizado) todas las soluciones a los subproblemas posibles, y con lo cual podemos hallar la solución óptima para nuestro problema original.
+    \item Es decir, dado que cada subproblema se resuelve de forma óptima y se usan esas soluciones para construir la solución final, el algoritmo garantiza que dicha solución será la ganancia máxima que Sophia puede obtener.
+\end{itemize}
