@@ -22,8 +22,8 @@ def _juego_monedas(arr, inicio = 0, fin = 0, memory = {}):
     primer_moneda = arr[inicio]
     ultima_moneda = arr[fin-1]
     
-    decision_mateo_1 = decision_mateo(arr, inicio + 1, fin)
-    decision_mateo_2 = decision_mateo(arr, inicio, fin-1)
+    decision_mateo_1 = decision_mateo(arr, inicio + 1, fin) # Si Sophia agarra la primer moneda
+    decision_mateo_2 = decision_mateo(arr, inicio, fin-1) # Si Sophia agarra la ultima moneda
 
     ganancia = max(primer_moneda + _juego_monedas(arr,decision_mateo_1[0],decision_mateo_1[1], memory), 
                    ultima_moneda + _juego_monedas(arr, decision_mateo_2[0], decision_mateo_2[1], memory))
@@ -85,13 +85,11 @@ def main(path):
 
     monedas = obtener_monedas(path)
     resultado, memoria = juego_monedas(monedas)
-
     solucion, ganancia_mateo = reconstruir_solucion(memoria, monedas)
+
+    print("Movimientos: " + "; ".join(solucion))
     print(f"Ganancia Sophia: {resultado}")
     print(f"Ganancia Mateo: {ganancia_mateo}")
-    print("\nMovimientos:\n")
-    for elemento in solucion:
-        print(elemento)
 
 if __name__ == "__main__":
     path = sys.argv[1]

@@ -28,8 +28,12 @@ Para correr las pruebas, ejecutar el comando ```pytest``` sobre el directorio ra
 
 ***Nota**: Se debe contar con pytest instalado.*
 
-## Notebook para verificar complejidad algoritmica
-* Navegar al directirio `/VerificacionComplejidad`
-* Iniciar el venv con source `myenv/bin/activate`
-* Instalar dependencias necesarias con `pip install -r requirements.txt`
-* Lanzar Jupyter notebook con `jupyter notebook`
+## Notebook para verificar complejidad algorítmica
+* Navegar al directorio `/VerificacionComplejidad`
+* Instalar el paquete python3-venv (si no está instalado): `sudo apt install python3-venv`
+* Crear el entorno virtual: `python3 -m venv myenv`
+* Iniciar el venv: `source myenv/bin/activate`
+* Instalar dependencias necesarias con: `pip install -r requirements.txt`
+* Lanzar Jupyter notebook con: `jupyter notebook`
+
+Al finalizar, para desactivar el entorno virtual: `deactivate`
